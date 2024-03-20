@@ -1,0 +1,92 @@
+Kafka Stock Market Analysis Project
+
+These are the steps and commands needed to be performed in the command prompt to install and start (zookeeper and kafka server) all the required systems needed to produce and consume the data.
+
+Project Folder Navigation - cd Documents > cd kafka\ stock\ market\ project
+
+
+1. To start and run the ec2 database on the terminal
+--------------------------
+
+ssh -i "kafka-stock-market-project-key.pem" ec2-user@ec2-18-119-115-203.us-east-2.compute.amazonaws.com
+
+2. To install apache spark on the terminal (zip file)
+--------------------------
+
+wget https://downloads.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+
+3. To extract the apache 
+--------------------------
+
+tar -xvf kafka_2.13-3.7.0.tgz
+
+4. Apache kafka won’t run on the terminal so we have to download the java to run
+--------------------------
+
+sudo yum install java
+
+5. Now we need to start the zookeeper and kafka server both
+--------------------------
+
+Start Zookeeper - bin/zookeeper-server-start.sh config/zookeeper.properties
+
+6. Go to file > new > with same profile- basic as on the first we will have zookeeper running and on second we will kafka running
+--------------------------
+
+ssh -i "kafka-stock-market-project-key.pem" ec2-user@ec2-18-119-115-203.us-east-2.compute.amazonaws.com
+
+7. Now we need to increase the space for kafka machine
+--------------------------
+
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M" --> to increase the space allocation for kafka server
+
+cd kafka_2.13-3.7.0
+
+bin/kafka-server-start.sh config/server.properties
+
+--> We cannot work on this server as it is a private server (on EC2 AWS) and we have to change the DNS, we cannot access private DNS from local computer unless on the same network
+We will change it to public IP
+
+Stop the servers both
+
+sudo nano config/server.properties
+
+Update/ change ADVERTISED_LISTENERS to {public ip} of the EC2 instance
+
+Then start both the servers again
+
+8. Now we need to add security in the ec2 machine was website
+--------------------------
+
+Go to security > security groups > edit inbound rules > add rule > type - all traffic > source - my ip (keep ip hidden) > save rules (although it is not a safe practice and should not allow traffic from all over the world, we are doing it for the sake of learning)
+
+9. Now we will create a topic
+--------------------------
+
+Go to file > new > with same profile- basic (3rd terminal)
+cd kafka_2.13-3.7.0
+
+bin/kafka-topics.sh --create --topic demo_test --bootstrap-server {public ip}:9092 --replication-factor 1 --partitions 1
+
+
+10. Start Producer: on the same 3rd window terminal
+--------------------------
+
+bin/kafka-console-producer.sh --topic demo_test --bootstrap-server {public ip}:9092 
+
+11. Start Consumer:  
+-------------------------
+
+Duplicate the session & enter in a new console; Go to file > new > with same profile- basic (4th terminal)
+
+cd kafka_2.13-3.7.0
+bin/kafka-console-consumer.sh --topic demo_test --bootstrap-server {public ip}:9092
+
+
+
+
+
+
+Kill all java services.
+In Linux run killall -9 java
+Re-run the zookeeper and Kafka server. It works
