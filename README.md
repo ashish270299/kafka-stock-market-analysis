@@ -1,4 +1,4 @@
-# kafka-stock-market-analysis
+# kafka-real-time-stock-market-analysis
 
 ![Architecture](https://github.com/ashish270299/kafka-stock-market-analysis/assets/36132621/4f9150c5-d2fd-48db-b5dc-a2e394f34986)
 
