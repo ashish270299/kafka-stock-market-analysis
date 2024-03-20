@@ -1,5 +1,8 @@
 # kafka-stock-market-analysis
 
+![Architecture](https://github.com/ashish270299/kafka-stock-market-analysis/assets/36132621/4f9150c5-d2fd-48db-b5dc-a2e394f34986)
+
+
 This project focuses on leveraging real-time stock market data for analysis using a combination of Kafka, AWS services, and Python.
 
 By participating in this project, you'll develop expertise in the following areas:
