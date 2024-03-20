@@ -24,6 +24,6 @@ By participating in this project, you'll develop expertise in the following area
 
 **Data Warehousing:** Storing real-time stock market data in AWS S3 for further processing and analysis.
 
-**Real-Time Insights:** Extracting real-time insights from the data stream using Amazon Athena.
+**Real-Time Insights:** Extracting real-time insights from the data stream using Amazon Athena. SQL can be used to query the data as per the need.
 
 **Application Development:** Combining the components to build a comprehensive real-time stock market data analysis application.
